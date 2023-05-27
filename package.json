@@ -1,0 +1,43 @@
+{
+  "name": "remote-cloudflare-kv",
+  "version": "0.0.0",
+  "description": "A Cloudflare KV SDK for Remote use.",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "module": "./dist/index.esm.js",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
+  "scripts": {
+    "build": "bunchee --no-external --dts",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "lint": "lint-staged",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willin/remote-cloudflare-kv.git"
+  },
+  "keywords": [
+    "Cloudflare",
+    "KV",
+    "Worker",
+    "remote"
+  ],
+  "author": "Willin Wang <willin@willin.org> (https://github.com/willin)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/willin/remote-cloudflare-kv/issues"
+  },
+  "homepage": "https://github.com/willin/remote-cloudflare-kv#readme",
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "@willin/eslint-config": "^0.1.1",
+    "bunchee": "^3.1.1",
+    "eslint": "^8.41.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  }
+}
