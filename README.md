@@ -12,7 +12,7 @@ yarn add remote-cloudflare-kv
 pnpm install --save remote-cloudflare-kv
 ```
 
-## Useage
+## Usage
 
 ### Init
 
