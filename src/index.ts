@@ -162,7 +162,10 @@ export default class CloudflareKV {
     validateKey('GET', key);
     const type = validateGetOptions(options);
 
-    const res = await fetch(`${this.#baseUrl}/values/${key}`, { headers: this.#headers });
+    const res = await fetch(`${this.#baseUrl}/values/${key}`, {
+      headers: this.#headers,
+      next: { revalidate: 0 }
+    } as RequestInit);
     if (res.status === 404) return null;
     switch (type) {
       case 'text': {
@@ -209,7 +212,10 @@ export default class CloudflareKV {
     // @ts-ignore
     const value = await this.get(key, options);
     if (value === null) return { value, metadata: null };
-    const metadata = await fetch(`${this.#baseUrl}/metadata/${key}`, { headers: this.#headers })
+    const metadata = await fetch(`${this.#baseUrl}/metadata/${key}`, {
+      headers: this.#headers,
+      next: { revalidate: 0 }
+    } as RequestInit)
       .then((res) => res.json())
       .then(({ result }: { result: Metadata }) => result);
     return { value, metadata };
@@ -221,7 +227,10 @@ export default class CloudflareKV {
     }
 
     validateKey('DELETE', key);
-    await fetch(`${this.#baseUrl}/values/${key}`, { method: 'DELETE', headers: this.#headers });
+    await fetch(`${this.#baseUrl}/values/${key}`, {
+      method: 'DELETE',
+      headers: this.#headers
+    });
   }
 
   /* eslint-disable @typescript-eslint/restrict-template-expressions */
@@ -333,7 +342,10 @@ export default class CloudflareKV {
     if (prefix) targetUrl.searchParams.append('prefix', prefix);
     if (limit) targetUrl.searchParams.append('limit', `${limit}`);
     if (cursor) targetUrl.searchParams.append('cursor', cursor);
-    const res: unknown = await fetch(targetUrl, { headers: this.#headers }).then((r) => r.json());
+    const res: unknown = await fetch(targetUrl, {
+      headers: this.#headers,
+      next: { revalidate: 0 }
+    } as RequestInit).then((r) => r.json());
     // eslint-disable-next-line
     const { result: keys, result_info: info }: { result: StoredKeyMeta<Meta>[]; result_info: { cursor: string } } =
       res as any;
