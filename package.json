@@ -1,6 +1,6 @@
 {
   "name": "remote-cloudflare-kv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Cloudflare KV SDK for Remote use.",
   "types": "./dist/index.d.ts",
   "exports": {
